@@ -1,6 +1,7 @@
 import * as THREE from "three";
 import { gsap } from "gsap";
 import GUI from "lil-gui";
+import { BoxGeo } from "./_geometries";
 
 // lil-gui interface
 const gui = new GUI();
@@ -16,10 +17,11 @@ const canvasSizes = {
 };
 
 // Red cube
-const geometry = new THREE.BoxGeometry(1, 1, 1);
-const material = new THREE.MeshBasicMaterial({ color: 0xff0000 });
-const mesh = new THREE.Mesh(geometry, material);
-scene.add(mesh);
+// const geometry = new THREE.BoxGeometry(1, 1, 1);
+// const material = new THREE.MeshBasicMaterial({ color: 0xff0000 });
+// const mesh = new THREE.Mesh(geometry, material);
+// scene.add(mesh);
+const box1 = new BoxGeo(THREE, scene, gui);
 
 // Camera
 const camera = new THREE.PerspectiveCamera(
@@ -35,6 +37,7 @@ camera.position.z = 3;
 // Renderer
 const renderer = new THREE.WebGLRenderer({
   canvas: <HTMLCanvasElement>document.querySelector(".webgl"),
+  alpha: true,
 });
 renderer.setSize(canvasSizes.width, canvasSizes.height);
 renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
@@ -63,8 +66,8 @@ const infiniteFrameRequest = () => {
   // elapsedTime: Used this variable to adapt the animation with framerate
   const elapsedTime = clock.getElapsedTime();
 
-  mesh.position.y = Math.cos(elapsedTime);
-  mesh.position.x = Math.sin(elapsedTime);
+  // mesh.position.y = Math.cos(elapsedTime);
+  // mesh.position.x = Math.sin(elapsedTime);
 
   // Calling renderer and infiniteFrameFequest
   renderer.render(scene, camera);
